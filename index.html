@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For the badge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&Roboto:wght@500&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <img src="https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg" />
+  <canvas id="honor-the-badge" height="35" width="400"></canvas>
+  <script>
+    let sentence = '60% of the time'
+    let sentenceColor = '#a7bfc1'
+    let impact = 'works every time'
+    let impactColor = '#5593c7'
+
+
+    sentence = sentence.toUpperCase();
+    sentence = sentence.split(' ')
+    sentence = sentence.map(word => word.split('').join(' ')).join(' ‎ ‎ ‎')
+    let sentenceLen = sentence.length;
+    factorSentence = 4.184210526315789;
+
+    impact = impact.toUpperCase();
+    impact = impact.split(' ')
+    impact = impact.map(word => word.split('').join(' ')).join(' ‎ ‎ ')
+    let impactLen = impact.length;
+    factorImpact = 5.65210526315789;
+
+    setTimeout(function () {
+      const canvas = document.getElementById('honor-the-badge');
+      let width = (sentenceLen * factorSentence) + (impactLen * factorImpact)
+      canvas.width = width
+      const ctx = canvas.getContext('2d');
+
+
+      // Set sentence background
+      ctx.fillStyle = sentenceColor
+      ctx.fillRect(0, 0, sentenceLen * factorSentence, 38)
+
+      // Set sentence text
+      ctx.fillStyle = '#FFF'
+      ctx.font = '500 11.5px Roboto';
+      ctx.fillText(sentence, 13, 22);
+
+      // Set impact background
+      ctx.fillStyle = impactColor
+      ctx.fillRect(sentenceLen * factorSentence, 0, impactLen * factorImpact, 38)
+
+      // Set sentence text
+      ctx.fillStyle = '#FFF'
+      ctx.font = 'bold 11.25px Montserrat';
+      ctx.fillText(impact, 13 + sentenceLen * factorSentence, 22);
+
+      var url = canvas.toDataURL();
+      console.log(url)
+    }, 50)
+  </script>
+</body>
+
+</html>
+
+
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Roboto:wght@500);
+  @import url(https://fonts.googleapis.com/css?family=Montserrat:wght@800);
+
+  *,
+  *::after,
+  *::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: max-content;
+  }
+
+  #honor-the-badge {
+    margin-top: 1px;
+    background-color: aqua;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
